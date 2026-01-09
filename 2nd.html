@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOKORO | Japan Fixed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent: #00f2fe;
+            --sakura: #ffb7c5;
+            --text: #ffffff;
+        }
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: #0f172a; /* Solid dark base */
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            height: 70px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: bold; letter-spacing: 2px; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: 0.3s; }
+        .btn-login { background: var(--accent); color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 600; cursor: pointer; border: none; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1920&q=80') center/cover;
+        }
+
+        .hero h1 { font-size: 4rem; font-family: 'Playfair Display', serif; margin: 0; }
+
+        /* --- TRIP PLANNER & FIXED MAP --- */
+        section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        /* THE MAP FIX */
+        .map-wrapper {
+            width: 100%;
+            height: 500px;
+            border-radius: 30px;
+            border: 2px solid var(--glass-border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Dark Mode Map Filter */
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(100%) invert(92%) contrast(83%);
+            border: 0;
+        }
+
+        .booking-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .booking-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        /* SAKURA EFFECT */
+        .sakura {
+            position: fixed;
+            top: -10%;
+            color: var(--sakura);
+            user-select: none;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ITACHI</div>
+        <div class="nav-links">
+            <a href="#itinerary">Trip Plan</a>
+            <a href="#contact">Contact</a>
+            <button class="btn-login">Login</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Tokyo Dreams</h1>
+    </div>
+
+    <section id="itinerary">
+        <h2 style="text-align: center; margin-bottom: 50px;">Your Curated Route</h2>
+        <div class="grid-container">
+            <div class="itinerary-list">
+                <div class="booking-card">
+                    <h3>Day 1: Shibuya Sky</h3>
+                    <p>Experience the "Greater View" recommended by Lost LeBlanc.</p>
+                </div>
+                <div class="booking-card">
+                    <h3>Day 2: Old Tokyo</h3>
+                    <p>Explore the hidden alleys of Asakusa with Abroad in Japan.</p>
+                </div>
+                <div class="booking-card">
+                    <h3>Day 3: Digital Art</h3>
+                    <p>Dive into teamLab Planets as seen on Yes Theory.</p>
+                </div>
+            </div>
+
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m3!1d103708.23896266014!2d139.6738925574341!3d35.68095908151525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b8576281c2d%3A0x44fae39401827404!2sTokyo%2C%20Japan!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // SAKURA FALLING EFFECT
+        function createSakura() {
+            const petal = document.createElement('div');
+            petal.classList.add('sakura');
+            petal.innerHTML = '🌸';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 3 + 's';
+            petal.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 6000);
+        }
+        setInterval(createSakura, 400);
+    </script>
+</body>
+</html>

@@ -13,6 +13,7 @@ app.use(express.json());
 // Database Connection
 mongoose.connect(process.env.MONGO_URI, {
     serverSelectionTimeoutMS: 5000, // 5 seconds mein fail ho jayega agar connect nahi hua
+    dbName: 'portfolio'
 })
 .then(() => console.log("✅ MongoDB connected!"))
 .catch(err => console.error("❌ Connection error:", err.message));

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base URL for the profile API
 // Ensure your backend is running on this port
-const API_URL = 'http://localhost:5000/api/profile';
+const API_URL = 'https://twok26.onrender.com/api/profile';
 
 // Fetch the profile data
 export const getProfile = async () => {
